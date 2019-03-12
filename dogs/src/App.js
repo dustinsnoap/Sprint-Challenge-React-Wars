@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CharacterCards from './components/character-cards/cards'
+import Dogs from './components/dogs/dogs'
 import './reset.css'
 import './App.css'
 
@@ -7,11 +7,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      dogs: []
     };
   }
   componentDidMount() {
-    this.getCharacters('https://swapi.co/api/people/');
+    this.getCharacters('https://dog.ceo/api/breed/hound/images/random/10000');
   }
   getCharacters = URL => {
     fetch(URL)
@@ -19,18 +19,16 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.setState({ dogs: data.message });
       })
       .catch(err => {
         throw new Error(err);
       });
   };
   render() {
-    console.log(this.state)    
     return (
       <div className="App">
-        <h1 className="Header">React Wars</h1>
-        <CharacterCards characters={this.state.starwarsChars}/>
+        <Dogs dogs={this.state.dogs}/>
       </div>
     );
   }
